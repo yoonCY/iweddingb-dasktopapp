@@ -1,0 +1,26 @@
+.row
+  h3 Version Management
+        
+  table.table.table-bordered.table-hover.table-condensed.table-custom(ng-if='versions.length' ng-cloak)
+    thead
+      tr
+        td Name
+        td Channel
+        td Asset Count
+        td Date
+        td
+    tbody
+      tr(data-ng-repeat='version in versions')
+        td {{ version.name }}
+        td {{ version.channel.name }}
+        td {{ version.assets.length }}
+        td(am-time-ago="version.createdAt")
+        td(style="white-space: nowrap")
+          button.btn.btn-default.btn-sm(ng-click="openEditModal(version)")
+            | More
+  .jumbotron(ng-hide="versions.length")
+    h5.text-gray No Versions Available
+
+  .btn-group
+    a.btn.btn-default(ng-click="openAddModal()") Add New Version
+    a.btn.btn-default(ng-show="hasMoreVersions" ng-click="loadMoreVersions()") Load more versions
